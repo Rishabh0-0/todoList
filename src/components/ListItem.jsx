@@ -1,21 +1,27 @@
 import React, { useState } from "react";
-import { X } from "lucide-react";
+import { Repeat, X } from "lucide-react";
 import { motion } from "framer-motion";
 
 const ListItem = ({ task, deleteTask, toggleComplete }) => {
   const [dragAmount, setDragAmount] = useState(0);
+  const [shake, setShake] = useState(false);
+
+  const shakeAnimation = {
+    x: [0, -2, 2, -2, 2, 0],
+    transition: { duration: 0.3, repeat: 1 },
+  };
 
   return (
     <div className="relative w-full">
       <motion.div
-        className="absolute inset-0 flex items-center justify-end p-3 rounded-md z-0 bg-red"
+        className="absolute inset-0 flex items-center justify-end p-3 rounded-md z-0"
         style={{
-          backgroundColor: `rgb(${255 - dragAmount / 3}, 0, ${
-            11 - dragAmount / 3
-          })`,
+          backgroundColor: `rgb(${255 - dragAmount / 2}, 0, 11)`,
         }}
       >
-        <X strokeWidth={4} color="#EEEEEE" />
+        <motion.div animate={shake ? shakeAnimation : {}}>
+          <X strokeWidth={4} color="#EEEEEE" />
+        </motion.div>
       </motion.div>
 
       <motion.li
@@ -31,12 +37,17 @@ const ListItem = ({ task, deleteTask, toggleComplete }) => {
         onDrag={(event, info) => {
           let dragValue = Math.min(Math.abs(info.offset.x), 150);
           setDragAmount(dragValue);
+
+          if (dragValue >= 150 && !shake) {
+            setShake(true);
+          }
         }}
         onDragEnd={(event, info) => {
           if (info.offset.x < -150) {
             deleteTask(task.id); // Delete when swiped left enough
           }
           setDragAmount(0);
+          setShake(false);
         }}
       >
         <span
