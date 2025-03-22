@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import InputItem from "./InputItem";
 import ListItem from "./ListItem";
+import { nanoid } from "nanoid";
 
 const Todolist = () => {
   const [tasks, setTasks] = useState([]);
@@ -8,19 +9,20 @@ const Todolist = () => {
   // Adding Task
   const addTask = (taskText) => {
     if (taskText.trim() === "") return;
-    setTasks([...tasks, { text: taskText, completed: false }]);
+    const newTask = { id: nanoid(), text: taskText, completed: false };
+    setTasks([...tasks, newTask]);
   };
 
   // Deleting a task
-  const deleteTask = (index) => {
-    setTasks(tasks.filter((_, i) => i !== index));
+  const deleteTask = (taskId) => {
+    setTasks(tasks.filter((task) => task.id !== taskId));
   };
 
   // Toggle complete state
-  const toggleComplete = (index) => {
+  const toggleComplete = (taskId) => {
     setTasks(
-      tasks.map((task, i) =>
-        i === index ? { ...task, completed: !task.completed } : task
+      tasks.map((task) =>
+        task.id === taskId ? { ...task, completed: !task.completed } : task
       )
     );
   };
@@ -32,11 +34,10 @@ const Todolist = () => {
       </h1>
       <InputItem addTask={addTask} />
       <ul>
-        {tasks.map((task, index) => (
+        {tasks.map((task) => (
           <ListItem
-            key={index}
+            key={task.id}
             task={task}
-            index={index}
             deleteTask={deleteTask}
             toggleComplete={toggleComplete}
           />

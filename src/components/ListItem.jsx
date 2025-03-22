@@ -1,7 +1,7 @@
 import React from "react";
 import { X } from "lucide-react";
 
-const ListItem = ({ task, index, deleteTask, toggleComplete }) => {
+const ListItem = ({ task, deleteTask, toggleComplete }) => {
   return (
     <li
       className={`flex justify-between items-center p-3 border-b bg-gray-100 rounded-md mb-2 shadow-sm ${
@@ -9,13 +9,13 @@ const ListItem = ({ task, index, deleteTask, toggleComplete }) => {
       }`}
     >
       <span
-        onClick={() => toggleComplete(index)}
+        onClick={() => toggleComplete(task.id)}
         className="cursor-pointer flex-1"
       >
         {task.text}
       </span>
       <button
-        onClick={() => deleteTask(index)}
+        onClick={() => deleteTask(task.id)}
         className="text-red-500 hover:text-red-700"
       >
         <X strokeWidth={4} />
