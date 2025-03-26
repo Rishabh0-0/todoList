@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Repeat, X } from "lucide-react";
 import { motion } from "framer-motion";
+import FancyCheckBox from "./fancyCheckBox";
 
 const ListItem = ({ task, deleteTask, toggleComplete }) => {
   const [dragAmount, setDragAmount] = useState(0);
@@ -12,9 +13,9 @@ const ListItem = ({ task, deleteTask, toggleComplete }) => {
   };
 
   return (
-    <div className="relative w-full">
+    <div className="relative w-full rounded-md">
       <motion.div
-        className="absolute inset-0 flex items-center justify-end p-3 rounded-md z-0"
+        className="absolute inset-0 flex items-center justify-end z-0 rounded-lg p-3"
         style={{
           backgroundColor: `rgb(${255 - dragAmount / 2}, 0, 11)`,
         }}
@@ -50,12 +51,8 @@ const ListItem = ({ task, deleteTask, toggleComplete }) => {
           setShake(false);
         }}
       >
-        <span
-          onClick={() => toggleComplete(task.id)}
-          className="cursor-pointer flex-1"
-        >
-          {task.text}
-        </span>
+        <FancyCheckBox task={task} toggleComplete={toggleComplete} />
+        <span className="cursor-pointer flex-1">{task.text}</span>
       </motion.li>
     </div>
   );
