@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Info, ChevronsRight } from "lucide-react";
 
 const ToolTip = ({ text }) => {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div className="relative">

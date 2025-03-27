@@ -1,10 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import InputItem from "./InputItem";
 import ListItem from "./ListItem";
 import { nanoid } from "nanoid";
 
 const Todolist = () => {
   const [tasks, setTasks] = useState([]);
+
+  // Load task from the local storage
+  useEffect(() => {
+    const storedTasks = JSON.parse(localStorage.getItem("tasks") || "[]");
+    console.log("Loaded tasks from localStorage:", storedTasks);
+    setTasks(storedTasks);
+  }, []);
+
+  // Save tasks to local storage whenever tasks change
+  useEffect(() => {
+    console.log("Saving tasks to localStorage:", tasks);
+    if (tasks.length > 0) {
+      localStorage.setItem("tasks", JSON.stringify(tasks));
+    }
+  }, [tasks]);
 
   // Adding Task
   const addTask = (taskText) => {
