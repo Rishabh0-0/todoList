@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import InputItem from "./InputItem";
 import ListItem from "./ListItem";
 import { nanoid } from "nanoid";
+import { Reorder, motion } from "framer-motion";
 
 const Todolist = () => {
   const [tasks, setTasks] = useState([]);
@@ -48,7 +49,7 @@ const Todolist = () => {
         Todo List
       </h1>
       <InputItem addTask={addTask} />
-      <ul>
+      <Reorder.Group axis="y" values={tasks} onReorder={setTasks}>
         {tasks.map((task) => (
           <ListItem
             key={task.id}
@@ -57,7 +58,7 @@ const Todolist = () => {
             toggleComplete={toggleComplete}
           />
         ))}
-      </ul>
+      </Reorder.Group>
     </div>
   );
 };

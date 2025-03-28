@@ -2,7 +2,11 @@ import React from "react";
 import Todolist from "./components/Todolist";
 import ToolTip from "./components/ToolTip";
 
-const toolTips = ["Swipe left to delete a task.", "Click to complete a task."];
+const toolTips = [
+  "Swipe left to delete a task.",
+  "Click to complete a task.",
+  "Drag up or down to reorder",
+];
 
 const App = () => {
   return (
