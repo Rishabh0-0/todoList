@@ -61,6 +61,9 @@ Make sure you have [Node.js](https://nodejs.org/) and npm installed on your syst
 - Adjust the task item styles in `ListItem.js`.
 - Change animation effects in `Framer Motion` components.
 
+## Live Link
+https://rishabh0-0.github.io/todoList/
+
 
 ## Author
 Your Name - [GitHub](https://github.com/Rishabh0-0)
