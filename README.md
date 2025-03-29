@@ -66,5 +66,5 @@ https://rishabh0-0.github.io/todoList/
 
 
 ## Author
-Your Name - [GitHub](https://github.com/Rishabh0-0)
+Your Name - [Rishabh](https://github.com/Rishabh0-0)
 
